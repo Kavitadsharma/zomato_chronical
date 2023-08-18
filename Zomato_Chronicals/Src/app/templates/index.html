@@ -1,0 +1,19 @@
+<!-- src/app/templates/index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Zomato Chronicles - Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>Welcome to Zomato Chronicles</h1>
+    <div id="order-status"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <script>
+        var socket = io.connect('http://' + document.domain + ':' + location.port);
+        socket.on('order_status', function(data) {
+            document.getElementById('order-status').innerText = 'Order Status: ' + data.status;
+        });
+    </script>
+</body>
+</html>
